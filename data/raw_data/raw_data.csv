@@ -1,2 +1,23 @@
-first_col, second_col, third_col
-some, raw, data
+Category,Item,"Scenario 1: Family of Four, Ontario Works","Scenario 2: Family of Four, Full-Time Minimum Wage Earner","Scenario 3: Family of Four, Median Income","Scenario 4: Single Parent Household with 2 Children, Ontario Works","Scenario 5: One person Household, Ontario Works","Scenario 6: One Person Household, Ontario Disability Support Program","Scenario 7: One Person Household, Old Age Security /Guaranteed Annual Income Supplement","Scenario 8: Married Couple, Ontario Disability Support Program","Scenario 9: Single Pregnant Person, Ontario Disability Support Program","Scenario 10: Single Person Household, Full-Time Minimum Wage Earner","Scenario 11: Single person, Minimum Wage Earner",...14
+Income,Income from Employment,NA,2687,9575,NA,NA,NA,NA,NA,NA,2687,2687,NA
+Income,Basic Allowance,494,NA,NA,360,343,706,NA,1409,706,NA,NA,NA
+Income,Maximum Shelter Allowance,254,NA,NA,226,85,109,NA,199,109,NA,NA,NA
+Income,Old Age Security/Guaranteed Income Supplement,NA,NA,NA,NA,NA,NA,1723,NA,NA,NA,NA,NA
+Income,Ontario Guaranteed Annual Income System,NA,NA,NA,NA,NA,NA,83,NA,NA,NA,NA,NA
+Income,Canada Child Benefit,1235,1192,248,1235,NA,NA,NA,NA,NA,1375,NA,NA
+Income,GST/HST credit,78,78,NA,78,26,32,39,51,32,78,39,NA
+Income,Ontario Trillium Benefit,169,169,NA,136,75,78,117,105,78,136,36,NA
+Income,Canada Worker Benefit,NA,159,NA,NA,NA,NA,NA,NA,NA,159,159,NA
+Employment Deduction,Employment Insurance paid,NA,-44,-137,NA,NA,NA,NA,NA,NA,-44,-44,NA
+Employment Deduction,Canada Pension Plan paid,NA,-143,-464,NA,NA,NA,NA,NA,NA,-143,-143,NA
+Income,Climate Action Incentive Payment (CAIP),62,62,62,54,31,31,31,47,31,54,31,NA
+Income,Pregnancy/Breast-feeding Nutritional Allowance (non-lactose intolerant),NA,NA,NA,NA,NA,NA,NA,NA,40,NA,NA,NA
+Income,Total,2292,4160,9284,2089,560,956,1993,1811,996,4302,2765,NA
+Selected Expenses,Average Monthly Rent,254,761,2096,226,85,109,542,199,109,761,761,NA
+Selected Expenses,Food,1177,1177,1177,866,422,422,304,705,401,751,351,NA
+Selected Expenses,Childcare,0,76,637,0,NA,NA,NA,NA,NA,76,NA,NA
+Selected Expenses,Transportation,353,849,849,230,123,123,128,742,123,619,619,NA
+Selected Expenses,Total,1784,2863,4759,1322,630,654,974,1646,633,2207,1731,NA
+Other,Funds Remaining,508,1297,4525,767,-70,302,1019,165,363,2095,1034,NA
+Other,Percentage of income required for rent,11,18,23,11,15,11,27,11,11,18,28,NA
+Other,Percentage of income required to purchase healthy food,51,28,13,41,75,44,15,39,40,17,13,NA

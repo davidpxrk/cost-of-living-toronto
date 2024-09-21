@@ -1,13 +1,12 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Cost of Living in Toronto"
+subtitle: "low-income families can not "
 author: 
-  - First author
-  - Another author
-thanks: "Code and data are available at: LINK."
+  - Hyunje Park
+thanks: "Code and data are available at: https://github.com/davidpxrk/cost-of-living-toronto"
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "In summary, all the t."
 format: pdf
 number-sections: true
 bibliography: references.bib
