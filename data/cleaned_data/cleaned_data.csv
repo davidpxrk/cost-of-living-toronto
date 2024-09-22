@@ -1,0 +1,23 @@
+Category,Item,Household_1,Household_2,Household_3,Household_4,Household_5,Household_6,Household_7,Household_8,Household_9,Household_10,Household_11
+Income,Income from Employment,0,2687,9575,0,0,0,0,0,0,2687,2687
+Income,Basic Allowance,494,0,0,360,343,706,0,1409,706,0,0
+Income,Maximum Shelter Allowance,254,0,0,226,85,109,0,199,109,0,0
+Income,Old Age Security/Guaranteed Income Supplement,0,0,0,0,0,0,1723,0,0,0,0
+Income,Ontario Guaranteed Annual Income System,0,0,0,0,0,0,83,0,0,0,0
+Income,Canada Child Benefit,1235,1192,248,1235,0,0,0,0,0,1375,0
+Income,GST/HST credit,78,78,0,78,26,32,39,51,32,78,39
+Income,Ontario Trillium Benefit,169,169,0,136,75,78,117,105,78,136,36
+Income,Canada Worker Benefit,0,159,0,0,0,0,0,0,0,159,159
+Employment Deduction,Employment Insurance paid,0,-44,-137,0,0,0,0,0,0,-44,-44
+Employment Deduction,Canada Pension Plan paid,0,-143,-464,0,0,0,0,0,0,-143,-143
+Income,Climate Action Incentive Payment (CAIP),62,62,62,54,31,31,31,47,31,54,31
+Income,Pregnancy/Breast-feeding Nutritional Allowance (non-lactose intolerant),0,0,0,0,0,0,0,0,40,0,0
+Income,Total,2292,4160,9284,2089,560,956,1993,1811,996,4302,2765
+Selected Expenses,Average Monthly Rent,254,761,2096,226,85,109,542,199,109,761,761
+Selected Expenses,Food,1177,1177,1177,866,422,422,304,705,401,751,351
+Selected Expenses,Childcare,0,76,637,0,0,0,0,0,0,76,0
+Selected Expenses,Transportation,353,849,849,230,123,123,128,742,123,619,619
+Selected Expenses,Total,1784,2863,4759,1322,630,654,974,1646,633,2207,1731
+Other,Funds Remaining,508,1297,4525,767,-70,302,1019,165,363,2095,1034
+Other,Percentage of income required for rent,11,18,23,11,15,11,27,11,11,18,28
+Other,Percentage of income required to purchase healthy food,51,28,13,41,75,44,15,39,40,17,13

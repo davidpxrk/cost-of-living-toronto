@@ -21,7 +21,7 @@ library(sf)
 # get package
 link <- "52182614-1f0b-42be-aca4-3f86dc8e004c"
 
-package <- show_package(link)
+package <- show_package("52182614-1f0b-42be-aca4-3f86dc8e004c")
 package
 
 # get all resources for this package
