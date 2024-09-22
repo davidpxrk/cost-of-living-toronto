@@ -21,11 +21,17 @@ bibliography: references.bib
 #install.packages("dplyr")
 #install.packages('tidyverse')
 #install.packages('sf')
+#remove.packages('knitr')
+install.packages('xfun')
+install.packages('knitr')
+
 
 # RUN THIS IN THE TERMINAL IF THERE'S AN ERROR IN EXPORTING TO PDF
 # Source: https://stackoverflow.com/questions/75906430/why-cant-i-render-any-quarto-documents-into-pdfs
 # quarto install tool tinytex
 
+library(here)
+library(knitr)
 library(opendatatoronto)
 library(tidyverse)
 library(dplyr)
@@ -33,17 +39,28 @@ library(sf)
 
 ## Read the 2 cleaned CSV files ##
 analysis_data = read_csv(here::here('data/cleaned_data/cleaned_data.csv'))
+  
 analysis_data_inverted = read_csv(here::here('data/cleaned_data/cleaned_data_inverted.csv'))
 ```
 
 
 # Introduction
 
-testing testing
+Toronto is the biggest and the most populous city in Canada. As the fourth largest city in North America, Toronto serves as a catalyst when it comes to being an international hub for many businesses, arts, sports and diverse cultures, attracting people from all around the world to come to Toronto to study at some of the best institutions, work or even simply travel as a Tourist. More importantly, Toronto is the most diverse city in Canada, with many people of different cultures, backgrounds, ethnicity coexist, and bridge cultural gaps and create a unity. 
+
+While this may seem like a perfect place to live for many international talents, residents of Toronto have said this to be far from the truth, with many sturggling financially to meet ends. 
 
 # Data
+```{r}
 
+analysis_data
+#kable(analysis_data)
+#knitr::kable(head(analysis_data[, 1:4]), format = "pipe")
+analysis_data %>% head() %>% knitr::kable()
+```
 ## Data Source
+
+
 
 ## Overview of the Dataset
 
