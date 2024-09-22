@@ -22,25 +22,30 @@ bibliography: references.bib
 #install.packages('tidyverse')
 #install.packages('sf')
 
-library(palmerpenguins)
+# RUN THIS IN THE TERMINAL IF THERE'S AN ERROR IN EXPORTING TO PDF
+# Source: https://stackoverflow.com/questions/75906430/why-cant-i-render-any-quarto-documents-into-pdfs
+# quarto install tool tinytex
+
 library(opendatatoronto)
 library(tidyverse)
 library(dplyr)
 library(sf)
+
+# Read the 2 cleaned CSV files
+analysis_data = read_csv('data/cleaned_data/cleaned_data.csv')
+analysis_data_inverted = read_csv('data/cleaned_data/cleaned_data_inverted.csv')
+
+analysis_data
+analysis_data_inverted
+
+
 ```
 
 
 # Introduction
 
-You can and should cross-reference sections and sub-sections. We use @citeR and @rohan.
+testing testing
 
-The remainder of this paper is structured as follows. @sec-data....
-
-
-
-
-
-\newpage
 
 
 # References

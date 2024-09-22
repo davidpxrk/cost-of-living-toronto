@@ -44,11 +44,11 @@ colnames(raw_data) = c("Category", "Item",
 cleaned_data <- raw_data
 
 #inverted version of raw_data, will need it for graphs in Section 3 Results
-cleaned_data_2 <- data.frame(t(raw_data[-1]))
-colnames(cleaned_data_2) <- raw_data[, 1]
+cleaned_data_inverted <- data.frame(t(raw_data[-1]))
+colnames(cleaned_data_inverted) <- raw_data[, 1]
 
-# change column names for inverted dataframe
-colnames(cleaned_data_2) <- c("Income 1",
+# change all the column names for inverted dataframe
+colnames(cleaned_data_inverted) <- c("Income 1",
                               "Income 2",
                               "Income 3",
                               "Income 4",
@@ -72,11 +72,11 @@ colnames(cleaned_data_2) <- c("Income 1",
                               "Other 3")
 
 # delete the first row (empty as well, unnecessary)
-cleaned_data_2 <- cleaned_data_2[-1,]
+cleaned_data_inverted <- cleaned_data_inverted[-1,]
 
 # change all the column datatype back to double
-cleaned_data_2[] <- sapply(cleaned_data_2, as.numeric)
-cleaned_data_2$"Household" <-  c("Household_1",
+cleaned_data_inverted[] <- sapply(cleaned_data_inverted, as.numeric)
+cleaned_data_inverted$"Household" <-  c("Household_1",
                                  "Household_2",
                                  "Household_3",
                                  "Household_4",
@@ -90,4 +90,5 @@ cleaned_data_2$"Household" <-  c("Household_1",
 
 # Save data
 write_csv(cleaned_data, 'data/cleaned_data/cleaned_data.csv')
-write_csv(cleaned_data_2, 'data/cleaned_data/cleaned_data_2.csv')
+write_csv(cleaned_data_inverted, 'data/cleaned_data/cleaned_data_inverted.csv')
+
