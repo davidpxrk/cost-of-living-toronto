@@ -6,7 +6,7 @@ author:
 thanks: "Code and data are available at: https://github.com/davidpxrk/cost-of-living-toronto"
 date: today
 date-format: long
-abstract: "This paper analyzes the living-cost data from low-income families living in Toronto, which is hosted publicly by the Open Data Toronto. It uses information on household income, expenses, government fiscal transfers and benefits to determine if low-income families are able to survive financially in Toronto. It was discovered that expenses exceeded income for most families (meaning low-income families are not able to survive in Toronto), and rent, food costs were among the highest expenses. This finding is important as it shows cost disprity in expenses, and guide fiscal policymakers on how they can help low-income families with living costs."
+abstract: "This paper analyzes the living-cost data from low-income families living in Toronto, which is hosted publicly by the Open Data Toronto. It uses information on household income, expenses, government fiscal transfers and benefits to determine if low-income families are able to survive financially in Toronto. It was discovered that expenses exceeded income for most families (meaning low-income families were not able to make ends meet in Toronto), and rent, food costs were among the highest expenses. This finding is important as it shows cost disparity in expenses, and provide insights to fiscal policymakers on how to better support low-income families with their living costs."
 format: pdf
 toc: true
 number-sections: true
@@ -31,14 +31,9 @@ library(tidyverse)
 library(dplyr)
 library(sf)
 
-# Read the 2 cleaned CSV files
-analysis_data = read_csv('data/cleaned_data/cleaned_data.csv')
-analysis_data_inverted = read_csv('data/cleaned_data/cleaned_data_inverted.csv')
-
-analysis_data
-analysis_data_inverted
-
-
+## Read the 2 cleaned CSV files ##
+analysis_data = read_csv(here::here('data/cleaned_data/cleaned_data.csv'))
+analysis_data_inverted = read_csv(here::here('data/cleaned_data/cleaned_data_inverted.csv'))
 ```
 
 
@@ -46,7 +41,32 @@ analysis_data_inverted
 
 testing testing
 
+# Data
 
+## Data Source
+
+## Overview of the Dataset
+
+
+## Average Income of the 11 Households
+
+
+## Average Expenses of the 11 Households
+
+
+## Difference between Income and Expense
+
+# Results
+
+# Discussion
+
+# Conclusion
+
+# Appendix
+
+# Statement on LLMs 
+
+LLMs and other generative AI tools were not used in the making of this paper.
 
 # References
 
