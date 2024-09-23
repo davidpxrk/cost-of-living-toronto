@@ -59,11 +59,14 @@ The paper is organized as follows: Section 2 (Data) of this paper introduces the
 
 # Data
 
-This report uses the "About Cost of living in Toronto for low-income households" (CITATION HERE) dataset, which is published publicly by the City of Toronto on the Open Data Portal. This data contains information on income such as employment income, GST/HST credits, pension benefits and expenses such as rent, food, transportations for 11 different scenarios of a low-income household. The 11 different scenarios of low-income household were manually selected by the City of Toronto to reflect different household characteristics that can increase the reliance on social assistance, such as type of income, single-parent household, etc. A detailed explanation of this 11 household scenarios can be found in the Appendix.
+This report uses the "About Cost of living in Toronto for low-income households" (CITATION HERE) dataset, which is published publicly by the Social Development, Finance & Administration of Toronto on City of Toronto's Open Data Portal. This data contains information on income such as employment income, GST/HST credits, pension benefits and expenses such as rent, food, transportation costs for 11 different scenarios of a low-income household. The 11 different scenarios of low-income household were manually selected by the City of Toronto to reflect different household characteristics that can increase the reliance on social assistance, such as type of income, single-parent household, etc. A detailed explanation of this 11 household scenarios can be found in the Appendix. The dataset is also within a monthly time period (monthly income and monthly expenses)
 
-This dataset was downloaded and analyzed using the R Programming Language (R Core Team 2022), opendatatoronto (CITATION HERE), knitr (CITATION HERE), tidyverse (CITATION HERE), here (CITATION), dplyr (CITATION) and sf (CITATION HERE). 
+The dataset was downloaded and analyzed using the R Programming Language (R Core Team 2022), opendatatoronto (CITATION HERE), knitr (CITATION HERE), tidyverse (CITATION HERE), here (CITATION), dplyr (CITATION) and sf (CITATION HERE). 
 
 ## Overview of the Dataset
+
+The dataset published by Social Development, Finance & Administration of Toronto was last updated on August 2024 on an annual basis. However, the dataset uses price estimates from July 2022 - July 2023 for its income and expenses of families. The variables chosen for this analysis were the 11 households, for each entry of the income and expense types. See Table 1 for an overview.
+
 ```{r}
 #| label: low-income-families
 #| fig-cap: "Table 1: Sample of the Income/Expenses of Low Income Households in Toronto"
@@ -73,7 +76,12 @@ This dataset was downloaded and analyzed using the R Programming Language (R Cor
 cleaned_data[, 1:5] %>% head() %>% knitr::kable()
 ```
 
+It is also to note that there were differing datasets based on different rent estimates. The dataset for rent prices using Toronto Regional Real Estate Board Market Rent was chosen. Furthermore, there were several entries in the dataset that were irrelevant, such as percentage of rent on income, which were filtered out.
+
 ## Average Income of the 11 Households
+
+By far, income from employment was the major income source for all the 11 households in Toronto, at approximately $1603 per month. This number also falls shy below the "low-income" threshold set by the City of Toronto, which is approximately $2208.5 (CITY OF TORONTO CITATION). See Table 2 for a sample of the dataset. 
+
 ```{r}
 #| label: low-income-families
 #| fig-cap: "Table 2: Average Income of Low Income Households in Toronto"
@@ -105,9 +113,11 @@ avg_income$"Average Income in $" <- round(avg_income$"Average Income in $", 0)
 avg_income %>% head() %>% knitr::kable()
 ```
 
-
+The numbers may not add up as they were rounded to the nearest whole number.
 
 ## Average Expenses of the 11 Households
+
+There is a huge price disparity between the expenses of the 11 families. The biggest expense was 
 ```{r}
 #| label: low-income-families
 #| fig-cap: "Table 3: Average Expenses of Low Income Households in Toronto"
@@ -151,6 +161,8 @@ avg_expense %>% head() %>% knitr::kable()
 
 
 income_expense_merged <- cleaned_data_inverted 
+
+cleaned_data_inverted
 
 income_expense_merged <- income_expense_merged %>% select("Total Income", "Total Expenses", "Remaining Funds")
 
