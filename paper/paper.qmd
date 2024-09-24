@@ -43,8 +43,6 @@ cleaned_data = read_csv(here::here('data/cleaned_data/cleaned_data.csv'))
 cleaned_data_inverted = read_csv(here::here('data/cleaned_data/cleaned_data_inverted.csv'))
 ```
 
-
-
 # Introduction
 
 Toronto is the biggest and the most populous city in Canada. As the fourth largest city in North America, Toronto serves as a catalyst when it comes to being an international hub for many businesses, arts, sports and diverse cultures, attracting people from all around the world to come to Toronto to study at some of the best institutions, work or even simply travel as a Tourist. More importantly, Toronto is the most diverse city in Canada, with many people of different cultures, backgrounds, ethnicity coexist, and bridge cultural gaps and create a unity. 
@@ -65,7 +63,7 @@ The dataset was downloaded and analyzed using the R Programming Language (R Core
 
 ## Overview of the Dataset
 
-The dataset published by Social Development, Finance & Administration of Toronto was last updated on August 2024 on an annual basis. However, the dataset uses price estimates from July 2022 - July 2023 for its income and expenses of families. The variables chosen for this analysis were the 11 households, for each entry of the income and expense types. See Table 1 for an overview.
+The dataset published by Social Development, Finance & Administration of Toronto was last updated on August 2024 on an annual basis. However, the dataset uses price estimates from July 2022 - July 2023 for its income and expenses of the families. The variables chosen for this analysis were the 11 households, for each entry of the income and expense types. See Table 1 for an overview. It is noted that expenses and households 4 to 11 are not visible in the preview.
 
 ```{r}
 #| label: low-income-families
@@ -80,7 +78,7 @@ It is also to note that there were differing datasets based on different rent es
 
 ## Average Income of the 11 Households
 
-By far, income from employment was the major income source for all the 11 households in Toronto, at approximately $1603 per month. This number also falls shy below the "low-income" threshold set by the City of Toronto, which is approximately $2208.5 (CITY OF TORONTO CITATION). See Table 2 for a sample of the dataset. 
+By far, income from employment was the major income source for all the 11 households in Toronto, at approximately $1603 per month. This number also falls shy below the "low-income" threshold set by the City of Toronto, which is approximately $2208.5 (CITY OF TORONTO CITATION). See Table 2 for a overview of the dataset. 
 
 ```{r}
 #| label: low-income-families
@@ -117,7 +115,8 @@ The numbers may not add up as they were rounded to the nearest whole number.
 
 ## Average Expenses of the 11 Households
 
-There is a huge price disparity between the expenses of the 11 families. The biggest expense was 
+There is a huge price disparity between the expenses of the 11 families. The biggest expense was rent by a huge margin, at an average of $3146 per month, followed by food costs at $705. The huge spike in rent highlights a need for further investigation. See Table 3 for an overview of the dataset.
+
 ```{r}
 #| label: low-income-families
 #| fig-cap: "Table 3: Average Expenses of Low Income Households in Toronto"
@@ -142,7 +141,7 @@ avg_expense$"Average Expense in $" <- rowMeans(subset(avg_expense, select = c("H
 avg_expense <- avg_expense %>% select("Item", "Average Expense in $")
 
 # rename the columns to something more presentable
-colnames(avg_expense) <- c("Type of Income", "Average Expense in $")
+colnames(avg_expense) <- c("Type of Expense", "Average Expense in $")
 
 #round to the nearest integer
 avg_expense$"Average Expense in $" <- round(avg_expense$"Average Expense in $", 0)
@@ -154,6 +153,9 @@ avg_expense %>% head() %>% knitr::kable()
 
 ```
 ## Difference between Income and Expense
+
+To better understand the relationship between the income and expenses of the 11 families, they were merged together into a single dataset, as shown in Table 4. In addition to this, a variable for their difference was also created.
+
 ```{r}
 #| label: low-income-families
 #| fig-cap: "Table 4: Average Expenses of Low Income Households in Toronto"
@@ -170,9 +172,11 @@ income_expense_merged  %>% knitr::kable()
 ```
 
 # Results
+
+The distribution of income and expense for each household, shown in Figure 1 shows
 ```{r}
 #| label: low-income-families
-#| fig-cap: "Table 5: Average Expenses of Low Income Households in Toronto"
+#| fig-cap: "Figure 5: Average Expenses of Low Income Households in Toronto"
 #| echo: false
 
 data <- data.frame(
@@ -196,8 +200,6 @@ ggplot(data_long, aes(x = Household, y = Amount, fill = Type)) +
        y = "Amount") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-
 ```
 ```{r}
 #| label: low-income-families
@@ -209,11 +211,22 @@ avg_expense
 pie(expense_disparity$'Average Expense in $', expense_disparity$'Type of Income')
 
 ```
+
 # Discussion
+
+The tables and graphs above show that the expenses of these families exceed far of the income, suggesting they are not financially able to survive in Toronto. However, this raises the question, would providing more income to these families solve their financial issues? While giving more money to these families certainly help, having more money does not necessarily mean these families are utilizing their funds in an efficient way. For example, rent could differ significantly in price if the household chooses to reside in a highly populated area and contained more rooms. Furthermore, food prices can be significantly more if the families chose to eat out, rather than utilizing grocery stores. 
+
+Without context to this information, determining the efficiency of spending of the families is impossible. However, looking at the results show some inefficiencies in spending. For example, in Figure 3, the average rent was $3146 per month, a big difference from the average rent for a one-bedroom condo of $2,529 (Toronto Regional Estate Board, 2024). Expenses such as this could suggest that expenses could be correlated with poor financial decisions, however more research must be conducted to draw those conclusions.
 
 # Conclusion
 
 # Appendix
+
+## A.1 Detailed Information on the 11 Households
+
+The 11 different scenarios of low-income household were manually selected by the City of Toronto to reflect different household characteristics that can increase the reliance on social assistance, such as type of income, single-parent household, etc. The structure of the 11 households is as follows:
+
+Family 1:
 
 # Statement on LLMs 
 
