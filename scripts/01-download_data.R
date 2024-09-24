@@ -32,7 +32,7 @@ datastore_resources <- filter(resources, tolower(format) %in% c('csv', 'geojson'
 datastore_resources
 
 # load the first data store resource as a sample
-raw_data <- filter(resources,row_number()==1) %>% get_resource()
+raw_data <- filter(resources,row_number()==5) %>% get_resource()
 raw_data
 
 #### Save data ####

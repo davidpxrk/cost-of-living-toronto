@@ -21,15 +21,14 @@ bibliography: references.bib
 #install.packages("dplyr")
 #install.packages('tidyverse')
 #install.packages('sf')
-#remove.packages('knitr')
-#install.packages('xfun')
+#remove.packages('knitr')S
 #install.packages('knitr')
-
+#install.packages('ggplot2)
 
 # RUN THIS IN THE TERMINAL IF THERE'S AN ERROR IN EXPORTING TO PDF
 # Source: https://stackoverflow.com/questions/75906430/why-cant-i-render-any-quarto-documents-into-pdfs
 # quarto install tool tinytex
-
+library(ggplot2)
 library(here)
 library(knitr)
 library(opendatatoronto)
@@ -47,9 +46,9 @@ cleaned_data_inverted = read_csv(here::here('data/cleaned_data/cleaned_data_inve
 
 Toronto is the biggest and the most populous city in Canada. As the fourth largest city in North America, Toronto serves as a catalyst when it comes to being an international hub for many businesses, arts, sports and diverse cultures, attracting people from all around the world to come to Toronto to study at some of the best institutions, work or even simply travel as a tourist. More importantly, Toronto is the most diverse city in Canada, with many people of different cultures, backgrounds, ethnicity coexist, and bridge cultural gaps and create a unity. 
 
-While Toronto may seem like a perfect place to live, residents have said this to be far from the truth, with many struggling financially to meet ends, especially for those from a low income background. For example, according to the Daily Bread Food Bank, `1/10` people in Toronto relied on food banks in 2023, a huge increase from `1/20` from 2022 (CITATION HERE).
+While Toronto may seem like a perfect place to live, residents have said this to be far from the truth, with many struggling financially to meet ends, especially for those from a low income background. For example, according to the Daily Bread Food Bank, `1/10` people in Toronto relied on food banks in 2023, a huge increase from `1/20` from 2022 [@citewhoshungry].
 
-According to the City of Toronto, the threshold for `LIM_AT` (threshold to be considered low income) was `$26,503` for 1 person household, `$37,480` for two person household and `$53,005` for a four person household (CITATION, CITY OF TORONTO). `13.2%` of Toronto's population fell under this category of low-income. Furthermore, Toronto continues to have a higher rate of low income than any other regions in the GTHA at `8.09%` (CITATION HERE), highlighting an issue of income discrepancy.
+According to the City of Toronto, the threshold for `LIM_AT` (threshold to be considered low income) was `$26,503` for 1 person household, `$37,480` for two person household and `$53,005` for a four person household [@citecityoftoronto]. `13.2%` of Toronto's population fell under this category of low-income. Furthermore, Toronto continues to have a higher rate of low income than any other regions in the GTHA at `8.09%` [@citecityoftoronto], highlighting an issue of income discrepancy.
 
 This paper aims to analyze if low income families living in Toronto are financially able to survive. The analysis focuses on two different metrics; income (which includes income from employment, government benefits and transfers such as GST/HST credit, Canada Pension Plan and Canada Worker Benefits) and expenses (which includes rent, childcare, food and transportation costs). The difference between income and expenses can assess whether or not low-income families are able to survive, and can guide future policymakers on what areas of expenses the low-income families can get additional support.
 
@@ -57,13 +56,13 @@ The paper is organized as follows: @sec-data (Data) of this paper introduces the
 
 # Data {#sec-data}
 
-This report uses the "About Cost of living in Toronto for low-income households" (CITATION HERE) dataset, which is published publicly by the Social Development, Finance & Administration of Toronto on City of Toronto's Open Data Portal. This data contains information on income such as employment income, GST/HST credits, pension benefits and expenses such as rent, food, transportation costs for 11 different scenarios of a low-income household. The 11 different scenarios of low-income household were manually selected by the City of Toronto to reflect different household characteristics that can increase the reliance on social assistance, such as type of income, single-parent household, etc. A detailed explanation of this 11 household scenarios can be found in the Appendix. The dataset is also within a monthly time period, reflecting monthly income and expenses.
+This report uses the "About Cost of living in Toronto for low-income households" [@citecityoftoronto] dataset, which is published publicly by the Social Development, Finance & Administration of Toronto on City of Toronto's Open Data Portal. This data contains information on income such as employment income, GST/HST credits, pension benefits and expenses such as rent, food, transportation costs for 11 different scenarios of a low-income household. The 11 different scenarios of low-income household were manually selected by the City of Toronto to reflect different household characteristics that can increase the reliance on social assistance, such as type of income, single-parent household, etc. A detailed explanation of this 11 household scenarios can be found in the Appendix. The dataset is also within a monthly time period, reflecting monthly income and expenses.
 
-The dataset was downloaded and analyzed using the R Programming Language (R Core Team 2022), opendatatoronto (CITATION HERE), knitr (CITATION HERE), tidyverse (CITATION HERE), here (CITATION), dplyr (CITATION) and sf (CITATION HERE). 
+The dataset was downloaded and analyzed using the `R Programming Language` [@citeR], `opendatatoronto` [@citeopendatatoronto], `knitr` [@citeknitr], `tidyverse` [@citetidyverse], `here` [@citehere], `dplyr` [@citedplyr] and `sf` [@citesf]. 
 
 ## Overview of the Dataset
 
-The dataset published by `Social Development, Finance & Administration of Toronto` was last updated on August 2024 on an annual basis. However, the dataset uses price estimates from July 2022 - July 2023 for its income and expenses of the families. The variables chosen for this analysis were variables for the 11 households, for each entry of the income and expense types. See Table 1 for an overview. It is noted that expenses and Households 4 to 11 are not visible in the preview, and expenses are not visible due to the long list of income that is above it.
+The dataset published by `Social Development, Finance & Administration of Toronto` was last updated on August 2024 on an annual basis. However, the dataset uses price estimates from July 2022 - July 2023 for its income and expenses of the families. The variables chosen for this analysis were variables for the 11 households, for each entry of the income and expense types. See Table 1 for an overview. It is noted that expenses are not visible in `Table 1` due to the long list of income that occupies the first rows.
 
 
 ```{r}
@@ -80,7 +79,7 @@ It is also to note that the dataset for rent prices using `Toronto Regional Real
 
 ## Average Income of the 11 Households
 
-`Table 2` shows that income from employment was the major income source for all the 11 households in Toronto by a large margin, at approximately $1603 per month. This number also falls shy below the "low-income" threshold set by the City of Toronto, which is approximately $2208.5 (CITY OF TORONTO CITATION). 
+`Table 2` shows that income from employment was the major income source for all the 11 households in Toronto by a large margin, at approximately $1603 per month. This number also falls shy below the "low-income" threshold set by the City of Toronto, which is approximately $2208.5 [@citedcityoftoronto].
 
 ```{r}
 #| label: low-income-families2
@@ -226,11 +225,10 @@ text(x = 0, y = 0, labels = labels, pos = 3, cex = 0.8, col = "white")
 
 The tables and graphs above show that the expenses of these families exceed far of the income, suggesting they are not financially able to survive in Toronto. Furthermore, rent comprised X% of the total expenses, highlighting a need for policymakers to focus on housing prices. However, this raises the question, would providing more income to these families solve their financial issues? While giving more money to these families certainly help, but having more money does not necessarily mean these families are utilizing their funds in an efficient way. For example, rent prices could differ significantly if a family chooses to reside in a highly populated area and if the house contained more rooms. Furthermore, food prices can be significantly more if the families chose to eat out, rather than utilizing lower-costing grocery stores. 
 
-Without context to this information, determining the efficiency of spending of the families is impossible. However, looking at the results suggest some inefficiencies in spending. For example, in `Figure 3`, the average rent was $3146 per month for the 11 families, a big difference from the average rent for a one-bedroom condo of $2,529 in Toronto for Q2 of 2023 (Toronto Regional Estate Board, 2024). Expenses such as this could suggest that expenses could be correlated with poor financial decisions, however more research must be conducted to draw those conclusions.
+Without context to this information, determining the efficiency of spending of the families is impossible. However, looking at the results suggest some inefficiencies in spending. For example, in `Figure 3`, the average rent was $3146 per month for the 11 families, a big difference from the average rent for a one-bedroom condo of $2,529 in Toronto for Q2 of 2023 [@citerentalmarket]. Expenses such as this could suggest that expenses could be correlated with poor financial decisions, however more research must be conducted to draw those conclusions.
 
 # Conclusion {#sec-conclusion}
 
-In summary, expenses exceeded income for most of the 11 household scenarios generated by the `City of Toronto`, demonstrating low-income families may not be able to make ends meet financially. Furthermore, rent made up a significant portion of the families' expenses, guiding policymakers to focus on this area. Further research on consumer spending behavior could better explain the expenses behind the families.
 
 # Appendix {#sec-appendix}
 
@@ -238,17 +236,27 @@ In summary, expenses exceeded income for most of the 11 household scenarios gene
 
 The 11 different scenarios of low-income household were manually selected by the `City of Toronto` to reflect different household characteristics that can increase the reliance on social assistance, such as type of income, single-parent household, etc. The structure of the 11 households is as follows:
 
-Household 1: 2 adults (male and female ages 31-50) with no income, 2 children (unable to contribute to income).
-Household 2: 2 adults (male and female ages 31-50) with minimum wage pay ($15.00/hr), 2 children (unable to contribute to income).
-Household 3: 2 adults (male and female ages 31-50) with median income, 2 children (unable to contribute to income).
-Household 4: 1 adult (female age 31-50) with no income, 2 children (unable to contribute to income).
-Household 5: 1 adult (male age 31-50) with no income.
-Household 6: 1 adult (male age 31-50) under `Ontario Disability Support Program`, 2 children (unable to contribute to income).
-Household 7: 1 adult (female age 70+) under Old Age Security/Guaranteed Annual Income Supplement.
-Household 8: 2 adults (male and female age 31-50) under Ontario Disability Support Program.
-Household 9: 1 adult (female age 19-30) under Ontario Disability Support Program.
-Household 10: 1 adult (female age 31-50) with minimum wage pay ($15.00/hr) with 2 children (unable to contribute to income).
-Household 11: 1 adult (female age 31-50) with minimum wage pay ($15.00/hr).
+`Household 1`: 2 adults (male and female ages 31-50) with no income, 2 children (unable to contribute to income).
+
+`Household 2`: 2 adults (male and female ages 31-50) with minimum wage pay ($15.00/hr), 2 children (unable to contribute to income).
+
+`Household 3`: 2 adults (male and female ages 31-50) with median income, 2 children (unable to contribute to income).
+
+`Household 4`: 1 adult (female age 31-50) with no income, 2 children (unable to contribute to income).
+
+`Household 5`: 1 adult (male age 31-50) with no income.
+
+`Household 6`: 1 adult (male age 31-50) under `Ontario Disability Support Program`, 2 children (unable to contribute to income).
+
+`Household 7`: 1 adult (female age 70+) under Old Age Security/Guaranteed Annual Income Supplement.
+
+`Household 8`: 2 adults (male and female age 31-50) under Ontario Disability Support Program.
+
+`Household 9`: 1 adult (female age 19-30) under Ontario Disability Support Program.
+
+`Household 10`: 1 adult (female age 31-50) with minimum wage pay ($15.00/hr) with 2 children (unable to contribute to income).
+
+`Household 11`: 1 adult (female age 31-50) with minimum wage pay ($15.00/hr).
 
 The children mentioned are under the mandatory working age limit and therefore unable to join the workforce.
 
@@ -257,10 +265,3 @@ The children mentioned are under the mandatory working age limit and therefore u
 LLMs and other generative AI tools were not used in the making of this paper.
 
 # References
-
-https://www.toronto.ca/wp-content/uploads/2022/07/9877-City-Planning-2021-Census-Backgrounder-Families-Hhlds-Marital-Status-Income.pdf
-
-https://www.dailybread.ca/wp-content/uploads/2023/11/DB-WhosHungryReport-2023-Digital.pdf
-
-
-
