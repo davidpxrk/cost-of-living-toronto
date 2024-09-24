@@ -6,7 +6,7 @@ author:
 thanks: "Code and data are available at: https://github.com/davidpxrk/cost-of-living-toronto"
 date: today
 date-format: long
-abstract: "This paper analyzes the living-cost data from low-income families living in Toronto, which is hosted publicly by the Open Data Toronto. It uses information on household income, expenses, government fiscal transfers and benefits to determine if low-income families are able to survive financially in Toronto. It was discovered that expenses exceeded income for most families (meaning low-income families were not able to make ends meet in Toronto), and rent, food costs were among the highest expenses. This finding is important as it shows cost disparity in expenses, and provide insights to fiscal policymakers on how to better support low-income families with their living costs."
+abstract: "This paper analyzes the living-cost data from low-income families living in Toronto, which is hosted publicly by the Open Data Toronto. It uses information on household income, expenses, government fiscal transfers, grants and benefits to determine if low-income families are able to survive financially in Toronto. It was discovered that expenses exceeded income for most families (meaning low-income families were not able to make ends meet in Toronto), and rent, food costs were among the highest expenses. This finding is important as it shows cost disparity in expenses, and provide insights to fiscal policymakers on what areas to better support low-income families with their living costs."
 format: pdf
 toc: true
 number-sections: true
@@ -45,25 +45,26 @@ cleaned_data_inverted = read_csv(here::here('data/cleaned_data/cleaned_data_inve
 
 # Introduction
 
-Toronto is the biggest and the most populous city in Canada. As the fourth largest city in North America, Toronto serves as a catalyst when it comes to being an international hub for many businesses, arts, sports and diverse cultures, attracting people from all around the world to come to Toronto to study at some of the best institutions, work or even simply travel as a Tourist. More importantly, Toronto is the most diverse city in Canada, with many people of different cultures, backgrounds, ethnicity coexist, and bridge cultural gaps and create a unity. 
+Toronto is the biggest and the most populous city in Canada. As the fourth largest city in North America, Toronto serves as a catalyst when it comes to being an international hub for many businesses, arts, sports and diverse cultures, attracting people from all around the world to come to Toronto to study at some of the best institutions, work or even simply travel as a tourist. More importantly, Toronto is the most diverse city in Canada, with many people of different cultures, backgrounds, ethnicity coexist, and bridge cultural gaps and create a unity. 
 
-While Toronto may seem like a perfect place to live, residents have said this to be far from the truth, with many sturggling financially to meet ends, especially for those that come from a low income background. For example, according to the Daily Bread Food Bank, one in 10 people in Toronto relied on food banks in 2023, a huge increase from one in 20 from 2022 (CITATION HERE).
+While Toronto may seem like a perfect place to live, residents have said this to be far from the truth, with many struggling financially to meet ends, especially for those from a low income background. For example, according to the Daily Bread Food Bank, 1/10 people in Toronto relied on food banks in 2023, a huge increase from 1/20 from 2022 (CITATION HERE).
 
 According to the City of Toronto, the threshold for LIM_AT (threshold to be considered low income) was $26,503 for 1 person household, $37,480 for two person household and $53,005 for a four person household (CITATION, CITY OF TORONTO). 13.2% of Toronto's population fell under this category of low-income. Furthermore, Toronto continues to have a higher rate of low income than any other regions in the GTHA at 8.09% (CITATION HERE), highlighting an issue of income discrepancy.
 
-This paper aims to analyze if low income families living in Toronto are financially able to survive. The analysis focuses on two different metrics; income (which includes income from employment, government benefits and transfers such as GST/HST credit, Canada Pension Plan and Canada Worker Benefits) and expense (which includes rent, childcare, food and transportation costs). The difference between income and expense can assess whether or not low-income families are able to survive, and can guide future policymakers on what areas of expenses the low-income families can get additional support.
+This paper aims to analyze if low income families living in Toronto are financially able to survive. The analysis focuses on two different metrics; income (which includes income from employment, government benefits and transfers such as GST/HST credit, Canada Pension Plan and Canada Worker Benefits) and expenses (which includes rent, childcare, food and transportation costs). The difference between income and expenses can assess whether or not low-income families are able to survive, and can guide future policymakers on what areas of expenses the low-income families can get additional support.
 
 The paper is organized as follows: Section 2 (Data) of this paper introduces the raw dataset of interest and some of the initial observations. Section 3 (Results) highlights some of the key insights that were derived from the data analysis. Section 4 (Discussion) discusses the observations from Section 3 and draws a conclusion from the findings. Finally, Section 5 (Conclusion) draws a brief summary of the key findings.
 
 # Data
 
-This report uses the "About Cost of living in Toronto for low-income households" (CITATION HERE) dataset, which is published publicly by the Social Development, Finance & Administration of Toronto on City of Toronto's Open Data Portal. This data contains information on income such as employment income, GST/HST credits, pension benefits and expenses such as rent, food, transportation costs for 11 different scenarios of a low-income household. The 11 different scenarios of low-income household were manually selected by the City of Toronto to reflect different household characteristics that can increase the reliance on social assistance, such as type of income, single-parent household, etc. A detailed explanation of this 11 household scenarios can be found in the Appendix. The dataset is also within a monthly time period (monthly income and monthly expenses)
+This report uses the "About Cost of living in Toronto for low-income households" (CITATION HERE) dataset, which is published publicly by the Social Development, Finance & Administration of Toronto on City of Toronto's Open Data Portal. This data contains information on income such as employment income, GST/HST credits, pension benefits and expenses such as rent, food, transportation costs for 11 different scenarios of a low-income household. The 11 different scenarios of low-income household were manually selected by the City of Toronto to reflect different household characteristics that can increase the reliance on social assistance, such as type of income, single-parent household, etc. A detailed explanation of this 11 household scenarios can be found in the Appendix. The dataset is also within a monthly time period, reflecting monthly income and expenses.
 
 The dataset was downloaded and analyzed using the R Programming Language (R Core Team 2022), opendatatoronto (CITATION HERE), knitr (CITATION HERE), tidyverse (CITATION HERE), here (CITATION), dplyr (CITATION) and sf (CITATION HERE). 
 
 ## Overview of the Dataset
 
-The dataset published by Social Development, Finance & Administration of Toronto was last updated on August 2024 on an annual basis. However, the dataset uses price estimates from July 2022 - July 2023 for its income and expenses of the families. The variables chosen for this analysis were the 11 households, for each entry of the income and expense types. See Table 1 for an overview. It is noted that expenses and households 4 to 11 are not visible in the preview.
+The dataset published by Social Development, Finance & Administration of Toronto was last updated on August 2024 on an annual basis. However, the dataset uses price estimates from July 2022 - July 2023 for its income and expenses of the families. The variables chosen for this analysis were variables for the 11 households, for each entry of the income and expense types. See Table 1 for an overview. It is noted that expenses and Households 4 to 11 are not visible in the preview, and expenses are not visible due to the long list of income that is above it.
+
 
 ```{r}
 #| label: low-income-families
@@ -74,14 +75,15 @@ The dataset published by Social Development, Finance & Administration of Toronto
 cleaned_data[, 1:5] %>% head() %>% knitr::kable()
 ```
 
-It is also to note that there were differing datasets based on different rent estimates. The dataset for rent prices using Toronto Regional Real Estate Board Market Rent was chosen. Furthermore, there were several entries in the dataset that were irrelevant, such as percentage of rent on income, which were filtered out.
+
+It is also to note that the dataset for rent prices using Toronto Regional Real Estate Board Market Rent was chosen. Furthermore, there were several entries in the dataset that were irrelevant, such as percentage of rent on income, which were filtered out.
 
 ## Average Income of the 11 Households
 
-By far, income from employment was the major income source for all the 11 households in Toronto, at approximately $1603 per month. This number also falls shy below the "low-income" threshold set by the City of Toronto, which is approximately $2208.5 (CITY OF TORONTO CITATION). See Table 2 for a overview of the dataset. 
+Table 2 shows that income from employment was the major income source for all the 11 households in Toronto by a large margin, at approximately $1603 per month. This number also falls shy below the "low-income" threshold set by the City of Toronto, which is approximately $2208.5 (CITY OF TORONTO CITATION). 
 
 ```{r}
-#| label: low-income-families
+#| label: low-income-families2
 #| fig-cap: "Table 2: Average Income of Low Income Households in Toronto"
 #| echo: false
 
@@ -111,14 +113,14 @@ avg_income$"Average Income in $" <- round(avg_income$"Average Income in $", 0)
 avg_income %>% head() %>% knitr::kable()
 ```
 
-The numbers may not add up as they were rounded to the nearest whole number.
+The numbers may not add up properly as they were rounded to the nearest whole number.
 
 ## Average Expenses of the 11 Households
 
-There is a huge price disparity between the expenses of the 11 families. The biggest expense was rent by a huge margin, at an average of $3146 per month, followed by food costs at $705. The huge spike in rent highlights a need for further investigation. See Table 3 for an overview of the dataset.
+There is a huge price disparity between the expenses of the 11 families. The biggest expense was rent, at an average of $3146 per month, followed by food costs at $705. The huge cost rent highlights a need for further investigation and is discussed in Section 4. See Table 3 for an overview of the dataset.
 
 ```{r}
-#| label: low-income-families
+#| label: low-income-families3
 #| fig-cap: "Table 3: Average Expenses of Low Income Households in Toronto"
 #| echo: false
 
@@ -154,17 +156,15 @@ avg_expense %>% head() %>% knitr::kable()
 ```
 ## Difference between Income and Expense
 
-To better understand the relationship between the income and expenses of the 11 families, they were merged together into a single dataset, as shown in Table 4. In addition to this, a variable for their difference was also created.
+To better understand the relationship between the income and expenses of the 11 families, they were merged together into a single dataset. In addition to this, a variable for their difference was also created. See Table 4 for a preview of the dataset.
 
 ```{r}
-#| label: low-income-families
+#| label: low-income-families4
 #| fig-cap: "Table 4: Average Expenses of Low Income Households in Toronto"
 #| echo: false
 
 
 income_expense_merged <- cleaned_data_inverted 
-
-cleaned_data_inverted
 
 income_expense_merged <- income_expense_merged %>% select("Total Income", "Total Expenses", "Remaining Funds")
 
@@ -173,9 +173,10 @@ income_expense_merged  %>% knitr::kable()
 
 # Results
 
-The distribution of income and expense for each household, shown in Figure 1 shows
+Figure 1 shows income and expense for each household. Overall, expenses exceed income for all households. Only one household had an income that exceed expenses.
+
 ```{r}
-#| label: low-income-families
+#| label: low-income-families5
 #| fig-cap: "Figure 5: Average Expenses of Low Income Households in Toronto"
 #| echo: false
 
@@ -201,24 +202,35 @@ ggplot(data_long, aes(x = Household, y = Amount, fill = Type)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
+Furthermore, Figure 2 gives us a better understanding of the spending behind the high expenses. Rent was by far the most expensive, comprising X% of the expenses.
+
 ```{r}
-#| label: low-income-families
-#| fig-cap: "Table 6: Average Expenses of Low Income Households in Toronto"
+#| label: low-income-families6
+#| fig-cap: "Figure 2: Average Expenses of Low Income Households in Toronto"
 #| echo: false
 
 expense_disparity <- head(avg_expense, 6)
-avg_expense
 pie(expense_disparity$'Average Expense in $', expense_disparity$'Type of Income')
 
+percentages <- round(100 * expense_disparity$'Average Expense in $' / sum(expense_disparity$'Average Expense in $'), 1)
+
+# Create labels with percentages
+labels <- paste(expense_disparity$'Type of Income', percentages, "%")
+
+# Generate the pie chart
+pie(expense_disparity$'Average Expense in $')
+text(x = 0, y = 0, labels = labels, pos = 3, cex = 0.8, col = "white")
 ```
 
 # Discussion
 
-The tables and graphs above show that the expenses of these families exceed far of the income, suggesting they are not financially able to survive in Toronto. However, this raises the question, would providing more income to these families solve their financial issues? While giving more money to these families certainly help, having more money does not necessarily mean these families are utilizing their funds in an efficient way. For example, rent could differ significantly in price if the household chooses to reside in a highly populated area and contained more rooms. Furthermore, food prices can be significantly more if the families chose to eat out, rather than utilizing grocery stores. 
+The tables and graphs above show that the expenses of these families exceed far of the income, suggesting they are not financially able to survive in Toronto. Furthermore, rent comprised X% of the total expenses, highlighting a need for policymakers to focus on housing prices. However, this raises the question, would providing more income to these families solve their financial issues? While giving more money to these families certainly help, but having more money does not necessarily mean these families are utilizing their funds in an efficient way. For example, rent prices could differ significantly if a family chooses to reside in a highly populated area and if the house contained more rooms. Furthermore, food prices can be significantly more if the families chose to eat out, rather than utilizing lower-costing grocery stores. 
 
-Without context to this information, determining the efficiency of spending of the families is impossible. However, looking at the results show some inefficiencies in spending. For example, in Figure 3, the average rent was $3146 per month, a big difference from the average rent for a one-bedroom condo of $2,529 (Toronto Regional Estate Board, 2024). Expenses such as this could suggest that expenses could be correlated with poor financial decisions, however more research must be conducted to draw those conclusions.
+Without context to this information, determining the efficiency of spending of the families is impossible. However, looking at the results suggest some inefficiencies in spending. For example, in Figure 3, the average rent was $3146 per month for the 11 families, a big difference from the average rent for a one-bedroom condo of $2,529 in Toronto for Q2 of 2023 (Toronto Regional Estate Board, 2024). Expenses such as this could suggest that expenses could be correlated with poor financial decisions, however more research must be conducted to draw those conclusions.
 
 # Conclusion
+
+In summary, expenses exceeded income for most of the 11 household scenarios generated by the City of Toronto, demonstrating low-income families may not be able to make ends meet financially. Furthermore, rent made up a significant portion of the families' expenses, guiding policymakers to focus on this area. Further research on consumer spending behavior could better explain the expenses behind the families.
 
 # Appendix
 
