@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains all the files required to build the report, Cost of Living in Toronto: Are low-income families able to survive financially here?. The report analyzes the livingcost data from low-income families living in Toronto, hosted publicly by the Open Data Toronto.
+This repository contains all the files required to build the report, **Cost of Living in Toronto: Are low-income families able to survive financially here?**. The report analyzes the livingcost data from low-income families living in Toronto, hosted publicly by the Open Data Toronto.
 
 ## File Structure
 
