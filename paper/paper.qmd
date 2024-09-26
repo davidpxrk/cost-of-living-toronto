@@ -56,7 +56,7 @@ The paper is organized as follows: @sec-data (Data) of this paper introduces the
 
 # Data {#sec-data}
 
-This report uses the "About Cost of living in Toronto for low-income households" [@citecityoftoronto] dataset, which is published publicly by the Social Development, Finance & Administration of Toronto on City of Toronto's Open Data Portal. This data contains information on income such as employment income, GST/HST credits, pension benefits and expenses such as rent, food, transportation costs for 11 different scenarios of a low-income household. The 11 different scenarios of low-income household were manually selected by the City of Toronto to reflect different household characteristics that can increase the reliance on social assistance, such as type of income, single-parent household, etc. A detailed explanation of this 11 household scenarios can be found in the Appendix. The dataset is also within a monthly time period, reflecting monthly income and expenses.
+This report uses the "About Cost of living in Toronto for low-income households" [@citecityoftoronto] dataset, which is published publicly by the Social Development, Finance & Administration of Toronto on City of Toronto's Open Data Portal. This data contains 17 variables on income and expenses such as `employment income`, `GST/HST credits`, `pension benefits`, `rent`, `food`, `transportation costs` for 11 different scenarios of a low-income household. The 11 different scenarios of low-income household were manually selected by the City of Toronto to reflect different household characteristics that can increase the reliance on social assistance, such as type of income, single-parent household, etc. A detailed explanation of this 11 household scenarios can be found in the Appendix. The dataset is also within a monthly time period, reflecting monthly income and expenses.
 
 The dataset was downloaded and analyzed using the `R Programming Language` [@citeR], `opendatatoronto` [@citeopendatatoronto], `knitr` [@citeknitr], `tidyverse` [@citetidyverse], `here` [@citehere], `dplyr` [@citedplyr] and `sf` [@citesf]. 
 
@@ -66,7 +66,7 @@ The dataset published by `Social Development, Finance & Administration of Toront
 
 
 ```{r}
-#| label: low-income-families
+#| label: low-income-families-preview
 #| fig-cap: "Table 1: Sample of the Income/Expenses of Low Income Households in Toronto"
 #| echo: false
 
@@ -79,10 +79,10 @@ It is also to note that the dataset for rent prices using `Toronto Regional Real
 
 ## Average Income of the 11 Households
 
-`Table 2` shows that income from employment was the major income source for all the 11 households in Toronto by a large margin, at approximately $1603 per month. This number also falls shy below the "low-income" threshold set by the City of Toronto, which is approximately $2208.5 [@citedcityoftoronto].
+`Table 2` shows that income from employment was the major income source for all the 11 households in Toronto by a large margin, at approximately $1603 per month. This number also falls shy below the "low-income" threshold set by the City of Toronto, which is approximately $2208.5 [@citecityoftoronto].
 
 ```{r}
-#| label: low-income-families2
+#| label: low-income-families-average-income
 #| fig-cap: "Table 2: Average Income of Low Income Households in Toronto"
 #| echo: false
 
@@ -119,7 +119,7 @@ The numbers may not add up properly as they were rounded to the nearest whole nu
 There is a huge price disparity between the expenses of the 11 families. The biggest expense was rent, at an average of $3146 per month, followed by food costs at $705. The huge cost rent highlights a need for further investigation and is discussed in @sec-discussion. See `Table 3` for an overview of the dataset.
 
 ```{r}
-#| label: low-income-families3
+#| label: low-income-families-average-expense
 #| fig-cap: "Table 3: Average Expenses of Low Income Households in Toronto"
 #| echo: false
 
@@ -150,8 +150,6 @@ avg_expense$"Average Expense in $" <- round(avg_expense$"Average Expense in $", 
 # absolute value (because employment insurance is relative to income)
 avg_expense$"Average Expense in $" <- abs(avg_expense$"Average Expense in $") 
 avg_expense %>% head() %>% knitr::kable()
-
-
 ```
 ## Difference between Income and Expense
 
@@ -163,9 +161,26 @@ To better understand the relationship between the income and expenses of the 11 
 #| echo: false
 
 
-income_expense_merged <- cleaned_data_inverted 
-
+income_expense_merged <- cleaned_data_inverted
 income_expense_merged <- income_expense_merged %>% select("Total Income", "Total Expenses", "Remaining Funds")
+
+# bring back household names, deleted for some reason
+income_expense_merged$"Household" <- c("Household_1",
+                                       "Household_2",
+                                       "Household_3",
+                                       "Household_4",
+                                       "Household_5",
+                                       "Household_6",
+                                       "Household_7",
+                                       "Household_8",
+                                       "Household_9",
+                                       "Household_10",
+                                       "Household_11"
+                                       )
+
+# put the household names at the start
+income_expense_merged <- income_expense_merged %>%
+  select("Household", everything())
 
 income_expense_merged  %>% knitr::kable()
 ```
@@ -176,7 +191,7 @@ income_expense_merged  %>% knitr::kable()
 
 ```{r}
 #| label: low-income-families5
-#| fig-cap: "Figure 5: Average Expenses of Low Income Households in Toronto"
+#| fig-cap: "Average Expenses of Low Income Households in Toronto"
 #| echo: false
 
 data <- data.frame(
@@ -195,35 +210,26 @@ data_long <- data %>%
 
 ggplot(data_long, aes(x = Household, y = Amount, fill = Type)) +
   geom_bar(stat = "identity", position = "dodge") +
-  labs(title = "Total Income vs Total Expenses for Each Household", 
+  labs(title = "Figure 1: Total Income vs Total Expenses for Each Household", 
        x = "Household", 
        y = "Amount") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
-Furthermore, `Figure 2` gives us a better understanding of the spending behind the high expenses. Rent was by far the most expensive, comprising X% of the expenses.
+Furthermore, `Figure 2` gives us a better understanding of the spending behind the high expenses. Rent was by far the most expensive, comprising 66% of the expenses.
 
 ```{r}
 #| label: low-income-families6
-#| fig-cap: "Figure 2: Expense Breakdown of Low Income Households in Toronto"
+#| fig-cap: "Expense Breakdown of Low Income Households in Toronto"
 #| echo: false
 
 expense_disparity <- head(avg_expense, 6)
-pie(expense_disparity$'Average Expense in $', expense_disparity$'Type of Income')
-
-percentages <- round(100 * expense_disparity$'Average Expense in $' / sum(expense_disparity$'Average Expense in $'), 1)
-
-# Create labels with percentages
-labels <- paste(expense_disparity$'Type of Income', percentages, "%")
-
-# Generate the pie chart
-pie(expense_disparity$'Average Expense in $')
-text(x = 0, y = 0, labels = labels, pos = 3, cex = 0.8, col = "white")
+pie(expense_disparity$'Average Expense in $', expense_disparity$'Type of Expense', main = "Figure 2: Cost Breakdown of Expenses", radius = 1, cex = 0.8) 
 ```
 
 # Discussion {#sec-discussion}
 
-The tables and graphs above show that the expenses of these families exceed far of the income, suggesting they are not financially able to survive in Toronto. Furthermore, rent comprised X% of the total expenses, highlighting a need for policymakers to focus on housing prices. However, this raises the question, would providing more income to these families solve their financial issues? While giving more money to these families certainly help, but having more money does not necessarily mean these families are utilizing their funds in an efficient way. For example, rent prices could differ significantly if a family chooses to reside in a highly populated area and if the house contained more rooms. Furthermore, food prices can be significantly more if the families chose to eat out, rather than utilizing lower-costing grocery stores. 
+The tables and graphs above show that the expenses of these families exceed far of the income, suggesting they are not financially able to survive in Toronto. Furthermore, rent comprised 66% of the total expenses, highlighting a need for policymakers to focus on housing prices. However, this raises the question, would providing more income to these families solve their financial issues? While giving more money to these families certainly help, but having more money does not necessarily mean these families are utilizing their funds in an efficient way. For example, rent prices could differ significantly if a family chooses to reside in a less populated area and if the house contained less rooms. Furthermore, food prices can be significantly less if the families utilized low-costing grocery stores over eating out at restaurants. 
 
 Without context to this information, determining the efficiency of spending of the families is impossible. However, looking at the results suggest some inefficiencies in spending. For example, in `Figure 3`, the average rent was $3146 per month for the 11 families, a big difference from the average rent for a one-bedroom condo of $2,529 in Toronto for Q2 of 2023 [@citerentalmarket]. Expenses such as this could suggest that expenses could be correlated with poor financial decisions, however more research must be conducted to draw those conclusions.
 
