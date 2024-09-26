@@ -235,6 +235,7 @@ Without context to this information, determining the efficiency of spending of t
 
 # Conclusion {#sec-conclusion}
 
+In summary, this paper investigated the income and and expenses of 11 different low-income household scenarios in Toronto. It showed that the average expenses far exceeded the average incomes, proving it impossible for low-income families to survive in Toronto. Furthermore, rent was the biggest expense, comprising 66% of the total average income, showing that aspect the biggest need for financial aid. Further research may be required to investigate into consumer spending behaviour that could help understand the reasoning behind the high expenses.
 
 # Appendix {#sec-appendix}
 
