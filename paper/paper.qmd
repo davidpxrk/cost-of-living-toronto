@@ -157,7 +157,7 @@ To better understand the relationship between the income and expenses of the 11 
 
 ```{r}
 #| label: low-income-families4
-#| fig-cap: "Table 4: Average Expenses of Low Income Households in Toronto"
+#| fig-cap: "Table 4: Differenece of Income and Expenses of Low Income Households in Toronto"
 #| echo: false
 
 
@@ -191,7 +191,7 @@ income_expense_merged  %>% knitr::kable()
 
 ```{r}
 #| label: low-income-families5
-#| fig-cap: "Average Expenses of Low Income Households in Toronto"
+#| fig-cap: "Total Income and Expenses of Low Income Households in Toronto"
 #| echo: false
 
 data <- data.frame(
@@ -212,7 +212,7 @@ ggplot(data_long, aes(x = Household, y = Amount, fill = Type)) +
   geom_bar(stat = "identity", position = "dodge") +
   labs(title = "Figure 1: Total Income vs Total Expenses for Each Household", 
        x = "Household", 
-       y = "Amount") +
+       y = "Amount in $") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
