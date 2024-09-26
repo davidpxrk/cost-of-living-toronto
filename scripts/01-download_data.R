@@ -1,10 +1,10 @@
 #### Preamble ####
-# Purpose: Downloads and saves the data from OpenDataToronto
+# Purpose: Downloads and saves the data from Open Data Toronto
 # Author: Hyunje Park
 # Date: 24 September 2024
 # Contact: hyunje.park@mail.utoronto.ca 
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
+# Pre-requisites: Packages listed below
 
 #### Workspace setup ####
 #install.packages('opendatatoronto')
