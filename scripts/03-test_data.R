@@ -3,9 +3,7 @@
 # Author: Hyunje Park
 # Date: 24 September 2024
 # Contact: hyunje.park@mail.utoronto.ca 
-# License: MIT
 # Pre-requisites: 01-download_data.R, packages listed below.
-
 
 #### Workspace setup ####
 #install.packages('opendatatoronto')
@@ -20,9 +18,10 @@ library(testthat)
 
 # get the cleaned dataset
 cleaned_data = read_csv(here::here('data/cleaned_data/cleaned_data.csv'))
-# cleaned_data_inverted is just an inverted version of cleaned_data, no need to test.
+cleaned_data_inverted = read_csv(here::here('data/cleaned_data/cleaned_data_inverted.csv'))
 
 #### Test cleaned_data ####
+### NEED TO TEST INCOME/EXPENSE IS PROPER ###
 
 # test 1 - test that it has all the columns
 test_that("Has all the columns",
@@ -45,22 +44,31 @@ test_that("Has all the columns",
 test_that("No NA values", 
           {expect_equal(sum(is.na(cleaned_data)), 0)})
 
-# test that all the Income/Expense variables are not negative
-# (because you cant have negative income and expenses)
-test_that("Income and Expense variables are not negative",
+# test that all the Income sources are positive values
+# (cant have negative Income)
+test_that("All Income variables are not negative",
           {
-          expect_true(all(cleaned_data$"Household_1" >= 0))
-          expect_true(all(cleaned_data$"Household_2" >= 0))
-          expect_true(all(cleaned_data$"Household_3" >= 0))
-          expect_true(all(cleaned_data$"Household_4" >= 0))
-          expect_true(all(cleaned_data$"Household_5" >= 0))
-          expect_true(all(cleaned_data$"Household_6" >= 0))
-          expect_true(all(cleaned_data$"Household_7" >= 0))
-          expect_true(all(cleaned_data$"Household_8" >= 0))
-          expect_true(all(cleaned_data$"Household_9" >= 0))
-          expect_true(all(cleaned_data$"Household_10" >= 0))
-          expect_true(all(cleaned_data$"Household_11" >= 0))
+          expect_true(all(cleaned_data_inverted$"Income 1" >= 0))
+          expect_true(all(cleaned_data_inverted$"Income 2" >= 0))
+          expect_true(all(cleaned_data_inverted$"Income 3" >= 0))
+          expect_true(all(cleaned_data_inverted$"Income 4" >= 0))
+          expect_true(all(cleaned_data_inverted$"Income 5" >= 0))
+          expect_true(all(cleaned_data_inverted$"Income 6" >= 0))
+          expect_true(all(cleaned_data_inverted$"Income 7" >= 0))
+          expect_true(all(cleaned_data_inverted$"Income 8" >= 0))
+          expect_true(all(cleaned_data_inverted$"Income 9" >= 0))
+          expect_true(all(cleaned_data_inverted$"Income 10" >= 0))
+          expect_true(all(cleaned_data_inverted$"Income 11" >= 0))
           }
           )
 
-
+cleaned_data_inverted
+# test that all Expenses are positive values
+test_that("All Expense variables are not negative",
+          {
+            expect_true(all(cleaned_data_inverted$"Expense 3" >= 0))
+            expect_true(all(cleaned_data_inverted$"Expense 4" >= 0))
+            expect_true(all(cleaned_data_inverted$"Expense 5" >= 0))
+            expect_true(all(cleaned_data_inverted$"Expense 6" >= 0))
+          }
+)
