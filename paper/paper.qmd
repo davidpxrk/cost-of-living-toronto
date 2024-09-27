@@ -62,12 +62,12 @@ The dataset was downloaded and analyzed using the `R Programming Language` [@cit
 
 ## Overview of the Dataset
 
-The dataset published by `Social Development, Finance & Administration of Toronto` was last updated on August 2024 on an annual basis. However, the dataset uses price estimates from July 2022 - July 2023 for its income and expenses of the families. The variables chosen for this analysis were variables for the 11 households, for each entry of the income and expense types. See Table 1 for an overview. It is noted that expenses are not visible in `Table 1` due to the long list of income that occupies the first rows.
+The dataset published by `Social Development, Finance & Administration of Toronto` was last updated on August 2024 on an annual basis. However, the dataset uses price estimates from July 2022 - July 2023 for its income and expenses of the families. The variables chosen for this analysis were variables for the 11 households, for each entry of the income and expense types. See @fig-preview for an overview. It is noted that expenses are not visible in @fig-preview due to the long list of income that occupies the first rows.
 
 
 ```{r}
-#| label: low-income-families-preview
-#| fig-cap: "Table 1: Sample of the Income/Expenses of Low Income Households in Toronto"
+#| label: fig-preview
+#| fig-cap: "Sample of the Income/Expenses of Low Income Households in Toronto"
 #| echo: false
 
 # PREVIEW OF THE DATA
@@ -79,11 +79,11 @@ It is also to note that the dataset for rent prices using `Toronto Regional Real
 
 ## Average Income of the 11 Households
 
-`Table 2` shows that income from employment was the major income source for all the 11 households in Toronto by a large margin, at approximately $1603 per month. This number also falls shy below the "low-income" threshold set by the City of Toronto, which is approximately $2208.5 [@citecityoftoronto].
+@fig-average-income shows that income from employment was the major income source for all the 11 households in Toronto by a large margin, at approximately $1603 per month. This number also falls shy below the "low-income" threshold set by the City of Toronto, which is approximately $2208.5 [@citecityoftoronto].
 
 ```{r}
-#| label: low-income-families-average-income
-#| fig-cap: "Table 2: Average Income of Low Income Households in Toronto"
+#| label: fig-average-income
+#| fig-cap: "Average Income of Low Income Households in Toronto"
 #| echo: false
 
 avg_income <- filter(cleaned_data, Category == "Income")
@@ -115,11 +115,11 @@ The numbers may not add up properly as they were rounded to the nearest whole nu
 
 ## Average Expenses of the 11 Households
 
-There is a huge price disparity between the expenses of the 11 families. The biggest expense was rent, at an average of $3146 per month, followed by food costs at $705. The huge cost rent highlights a need for further investigation and is discussed in @sec-discussion. See `Table 3` for an overview of the dataset. Note that all the values are rounded up and therefore may not add up to the total.
+There is a huge price disparity between the expenses of the 11 families. The biggest expense was rent, at an average of $3146 per month, followed by food costs at $705. The huge cost rent highlights a need for further investigation and is discussed in @sec-discussion. See @fig-average-expense for an overview of the dataset. Note that all the values are rounded up and therefore may not add up to the total.
 
 ```{r}
-#| label: low-income-families-average-expense
-#| fig-cap: "Table 3: Average Expenses of Low Income Households in Toronto"
+#| label: fig-average-expense
+#| fig-cap: "Average Expenses of Low Income Households in Toronto"
 #| echo: false
 
 avg_expense <- filter(cleaned_data, Category == "Employment Deduction" |
@@ -151,13 +151,14 @@ avg_expense$"Average Expense in $" <- abs(avg_expense$"Average Expense in $")
 
 avg_expense %>% head(7) %>% knitr::kable()
 ```
+
 ## Difference between Income and Expense
 
-To better understand the relationship between the income and expenses of the 11 families, they were merged together into a single dataset. In addition to this, a variable for their difference was also created. See `Table 4` for a preview of the dataset.
+To better understand the relationship between the income and expenses of the 11 families, they were merged together into a single dataset. In addition to this, a variable for their difference was also created. See @fig-income-expense for a preview of the dataset.
 
 ```{r}
-#| label: low-income-families4
-#| fig-cap: "Table 4: Differenece of Income and Expenses of Low Income Households in Toronto"
+#| label: fig-income-expense
+#| fig-cap: "Differenece of Income and Expenses of Low Income Households in Toronto"
 #| echo: false
 
 
@@ -189,10 +190,10 @@ income_expense_merged  %>% knitr::kable()
 
 # Results {#sec-results}
 
-`Figure 1` shows income and expense for each household. Overall, expenses exceed income for all households. Only one household had an income that exceed expenses.
+@fig-difference shows income and expense for each household. Overall, expenses exceed income for all households. Only one household had an income that exceed expenses.
 
 ```{r}
-#| label: low-income-families5
+#| label: fig-difference
 #| fig-cap: "Total Income and Expenses of Low Income Households in Toronto"
 #| echo: false
 
@@ -219,10 +220,10 @@ ggplot(data_long, aes(x = Household, y = Amount, fill = Type)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
-Furthermore, `Figure 2` gives us a better understanding of the spending behind the high expenses. Rent was by far the most expensive, comprising 66% of the expenses.
+Furthermore, @fig-breakdown gives us a better understanding of the spending behind the high expenses. Rent was by far the most expensive, comprising 66% of the expenses.
 
 ```{r}
-#| label: low-income-families6
+#| label: fig-breakdown
 #| fig-cap: "Expense Breakdown of Low Income Households in Toronto"
 #| echo: false
 
@@ -230,11 +231,13 @@ expense_disparity <- head(avg_expense, 6)
 pie(expense_disparity$'Average Expense in $', expense_disparity$'Type of Expense', main = "Figure 2: Cost Breakdown of Expenses", radius = 1, cex = 0.8) 
 ```
 
+\newpage
+
 # Discussion {#sec-discussion}
 
 The tables and graphs above show that the expenses of these families exceed far of the income, suggesting they are not financially able to survive in Toronto. Furthermore, rent comprised 66% of the total expenses, highlighting a need for policymakers to focus on housing prices. However, this raises the question, would providing more income to these families solve their financial issues? While giving more money to these families certainly help, but having more money does not necessarily mean these families are utilizing their funds in an efficient way. For example, rent prices could differ significantly if a family chooses to reside in a less populated area and if the house contained less rooms. Furthermore, food prices can be significantly less if the families utilized low-costing grocery stores over eating out at restaurants. 
 
-Without context to this information, determining the efficiency of spending of the families is impossible. However, looking at the results suggest some inefficiencies in spending. For example, in `Figure 3`, the average rent was $3146 per month for the 11 families, a big difference from the average rent for a one-bedroom condo of $2,529 in Toronto for Q2 of 2023 [@citerentalmarket]. Expenses such as this could suggest that expenses could be correlated with poor financial decisions, however more research must be conducted to draw those conclusions.
+Without context to this information, determining the efficiency of spending of the families is impossible. However, looking at the results suggest some inefficiencies in spending. For example, in @fig-average-expense, the average rent was $3146 per month for the 11 families, a big difference from the average rent for a one-bedroom condo of $2,529 in Toronto for Q2 of 2023 [@citerentalmarket]. Expenses such as this could suggest that expenses could be correlated with poor financial decisions, however more research must be conducted to draw those conclusions.
 
 # Conclusion {#sec-conclusion}
 
