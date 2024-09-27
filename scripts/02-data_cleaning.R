@@ -42,7 +42,8 @@ colnames(raw_data) = c("Category", "Item",
 
 cleaned_data <- raw_data
 
-#inverted version of raw_data, will need it for graphs in Section 3 Results
+#inverted version of raw_data, will need it for graphs in Section 3 Results,
+# as well as tests and simulations
 cleaned_data_inverted <- data.frame(t(raw_data[-1]))
 colnames(cleaned_data_inverted) <- raw_data[, 1]
 

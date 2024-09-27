@@ -108,15 +108,14 @@ colnames(avg_income) <- c("Type of Income", "Average Income in $")
 
 #round to the nearest integer
 avg_income$"Average Income in $" <- round(avg_income$"Average Income in $", 0)
-
-avg_income %>% head() %>% knitr::kable()
+avg_income %>% head(13) %>% knitr::kable()
 ```
 
 The numbers may not add up properly as they were rounded to the nearest whole number.
 
 ## Average Expenses of the 11 Households
 
-There is a huge price disparity between the expenses of the 11 families. The biggest expense was rent, at an average of $3146 per month, followed by food costs at $705. The huge cost rent highlights a need for further investigation and is discussed in @sec-discussion. See `Table 3` for an overview of the dataset.
+There is a huge price disparity between the expenses of the 11 families. The biggest expense was rent, at an average of $3146 per month, followed by food costs at $705. The huge cost rent highlights a need for further investigation and is discussed in @sec-discussion. See `Table 3` for an overview of the dataset. Note that all the values are rounded up and therefore may not add up to the total.
 
 ```{r}
 #| label: low-income-families-average-expense
@@ -149,6 +148,7 @@ avg_expense$"Average Expense in $" <- round(avg_expense$"Average Expense in $", 
 
 # absolute value (because employment insurance is relative to income)
 avg_expense$"Average Expense in $" <- abs(avg_expense$"Average Expense in $") 
+
 avg_expense %>% head() %>% knitr::kable()
 ```
 ## Difference between Income and Expense
