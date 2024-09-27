@@ -15,6 +15,12 @@ The repo is structured as:
 -   `scripts` contains the R scripts used to simulate, download and clean data.
 
 
+## Reproducing the Tables and Graphs
+1. Clone this repository onto your computer
+2. Download the data by running scripts/01-download_data.R
+3. Clean the data by running scripts/01-data_cleaning.R
+4. Run paper/paper.qmd to run the R Code for all the plots and tables.
+
 ## Statement on LLM usage
 
 LLM and GPTs were NOT used in the making of this paper.
