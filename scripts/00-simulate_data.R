@@ -1,11 +1,9 @@
 #### Preamble ####
-# Purpose: Simulates... [...UPDATE THIS...]
-# Author: Rohan Alexander [...UPDATE THIS...]
-# Date: 11 February 2023 [...UPDATE THIS...]
-# Contact: rohan.alexander@utoronto.ca [...UPDATE THIS...]
-# License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Purpose: Downloads and saves the data from Open Data Toronto
+# Author: Hyunje Park
+# Date: 24 September 2024
+# Contact: hyunje.park@mail.utoronto.ca 
+# Pre-requisites: Packages listed below
 
 
 #### Workspace setup ####

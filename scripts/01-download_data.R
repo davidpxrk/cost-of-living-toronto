@@ -3,7 +3,6 @@
 # Author: Hyunje Park
 # Date: 24 September 2024
 # Contact: hyunje.park@mail.utoronto.ca 
-# License: MIT
 # Pre-requisites: Packages listed below
 
 #### Workspace setup ####
