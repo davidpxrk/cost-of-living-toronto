@@ -204,6 +204,7 @@ data <- data.frame(
   Expenses = income_expense_merged$"Total Expenses"
 )
 
+# code idea acquired from https://stackoverflow.com/questions/10212106/creating-grouped-bar-plot-of-multi-column-data-in-r
 data_long <- data %>%
   pivot_longer(cols = c(Income, Expenses), 
                names_to = "Type", 
